@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: ldap-phpadmin
+  name: ldap-phpadmin
+spec:
+  ports:
+  - name: "ldap-phpadmin"
+    port: 80
+    targetPort: 80
+  selector:
+    app: ldap-phpadmin-rs
+  type: NodePort
+---
+apiVersion: extensions/v1beta1
+kind: ReplicaSet
+metadata:
+  name: ldap-phpadmin-rs
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ldap-phpadmin-rs
+    spec:
+      containers:
+      - env:
+        - name: LDAP_SERVER_BASE_DN
+          valueFrom:
+            configMapKeyRef:
+              key: LDAP_SERVER_BASE_DN
+              name: ldap-phpadmin-ldap-phpadmin-env
+        - name: LDAP_SERVER_BIND_ID
+          valueFrom:
+            configMapKeyRef:
+              key: LDAP_SERVER_BIND_ID
+              name: ldap-phpadmin-ldap-phpadmin-env
+        - name: LDAP_SERVER_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: LDAP_SERVER_HOST
+              name: ldap-phpadmin-ldap-phpadmin-env
+        - name: LDAP_SERVER_NAME
+          valueFrom:
+            configMapKeyRef:
+              key: LDAP_SERVER_NAME
+              name: ldap-phpadmin-ldap-phpadmin-env
+        - name: LDAP_SERVER_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: LDAP_SERVER_PORT
+              name: ldap-phpadmin-ldap-phpadmin-env
+        image: accenture/adop-ldap-phpadmin:0.1.0
+        name: ldap-phpadmin
+        ports:
+        - containerPort: 80

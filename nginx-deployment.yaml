@@ -1,0 +1,58 @@
+apiVersion: extensions/v1beta1
+kind: ReplicaSet
+metadata:
+  name: nginx
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - env:
+        - name: LDAP_GROUP_ATTRIBUTE
+          valueFrom:
+            configMapKeyRef:
+              key: LDAP_GROUP_ATTRIBUTE
+              name: nginx-nginx-env
+        - name: LDAP_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: LDAP_PASSWORD
+              name: nginx-nginx-env
+        - name: LDAP_SERVER
+          valueFrom:
+            configMapKeyRef:
+              key: LDAP_SERVER
+              name: nginx-nginx-env
+        - name: LDAP_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              key: LDAP_USERNAME
+              name: nginx-nginx-env
+        - name: LDAP_USER_BASE_DN
+          valueFrom:
+            configMapKeyRef:
+              key: LDAP_USER_BASE_DN
+              name: nginx-nginx-env
+        - name: LDAP_USER_ID_ATTRIBUTE
+          valueFrom:
+            configMapKeyRef:
+              key: LDAP_USER_ID_ATTRIBUTE
+              name: nginx-nginx-env
+        - name: LDAP_USER_OBJECT_CLASS
+          valueFrom:
+            configMapKeyRef:
+              key: LDAP_USER_OBJECT_CLASS
+              name: nginx-nginx-env
+        - name: constraint
+          valueFrom:
+            configMapKeyRef:
+              key: constraint
+              name: nginx-nginx-env
+        image: renuraj18/nginx
+        name: nginx
+        ports:
+        - containerPort: 80
+        - containerPort: 443
