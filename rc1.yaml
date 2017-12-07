@@ -29,8 +29,7 @@ spec:
       terminationGracePeriodSeconds: 60
       serviceAccountName: nginx-ingress-serviceaccount
       containers:
-#      - image: gcr.io/google_containers/nginx-ingress-controller:0.8.3
-      - image: renuraj18/nginx-ingress
+      - image: gcr.io/google_containers/nginx-ingress-controller:0.8.3
         name: nginx-ingress-controller
         imagePullPolicy: Always
         livenessProbe:
@@ -50,9 +49,6 @@ spec:
               fieldRef:
                 fieldPath: metadata.namespace
         ports:
-        # service for tcp-configmap-activemq on port 61616
-        # - containerPort: 61616
-        #   hostPort: 61616
         args:
         - /nginx-ingress-controller
         - --default-backend-service=$(POD_NAMESPACE)/ingress-default-backend

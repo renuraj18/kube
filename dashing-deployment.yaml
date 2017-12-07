@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: dashing
+  name: dashing
+spec:
+  ports:
+  - name: "dashing"
+    port: 3030
+    targetPort: 3030
+  selector:
+    app: dashing-rs
+  type: ClusterIP
+---
+apiVersion: extensions/v1beta1
+kind: ReplicaSet
+metadata:
+  name: dashing-rs
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: dashing-rs
+    spec:
+      containers:
+      - name: dashing
+        image: projectethan007/dashing
+        ports:
+        - containerPort: 3030
