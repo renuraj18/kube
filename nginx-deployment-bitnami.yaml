@@ -51,15 +51,8 @@ spec:
             configMapKeyRef:
               key: constraint
               name: nginx-nginx-env
-        image: renuraj18/nginx
+        image: bitnami/nginx:latest
         name: nginx
         ports:
-        - containerPort: 80
-        - containerPort: 443
-        volumeMounts:
-        - name: nginx-config
-          mountPath: /etc/nginx/sites-enabled
-      volumes:
-      - name: nginx-config
-        configMap:
-          name: nginx-conf
+        - containerPort: 8080
+        - containerPort: 8443

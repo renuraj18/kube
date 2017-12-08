@@ -29,3 +29,10 @@ spec:
         image: projectethan007/dashing
         ports:
         - containerPort: 3030
+        volumeMounts:
+        - name: dashing-config
+          mountPath: /root/.kube
+      volumes:
+      - name: dashing-config
+        configMap:
+          name: dashing-config

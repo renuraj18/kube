@@ -1,0 +1,7 @@
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: nexus-env
+apiVersion: v1
+data:
+  NEXUS_BASE_URL: "http://nexus/nexus"

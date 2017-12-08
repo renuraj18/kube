@@ -1,0 +1,141 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose -f jenkins.yml convert
+    kompose.version: 1.5.0 (999278f)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: jenkins
+  name: jenkins
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: jenkins
+    spec:
+      containers:
+      - env:
+        - name: ANT_VERSION
+          valueFrom:
+            configMapKeyRef:
+              key: ANT_VERSION
+              name: jenkins-jenkins-env
+        - name: GIT_GLOBAL_CONFIG_EMAIL
+          valueFrom:
+            configMapKeyRef:
+              key: GIT_GLOBAL_CONFIG_EMAIL
+              name: jenkins-jenkins-env
+        - name: GIT_GLOBAL_CONFIG_NAME
+          valueFrom:
+            configMapKeyRef:
+              key: GIT_GLOBAL_CONFIG_NAME
+              name: jenkins-jenkins-env
+        - name: GROOVY_VERSION
+          valueFrom:
+            configMapKeyRef:
+              key: GROOVY_VERSION
+              name: jenkins-jenkins-env
+        - name: INITIAL_ADMIN_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: INITIAL_ADMIN_PASSWORD
+              name: jenkins-jenkins-env
+        - name: INITIAL_ADMIN_USER
+          valueFrom:
+            configMapKeyRef:
+              key: INITIAL_ADMIN_USER
+              name: jenkins-jenkins-env
+        - name: JENKINS_OPTS
+          valueFrom:
+            configMapKeyRef:
+              key: JENKINS_OPTS
+              name: jenkins-jenkins-env
+        - name: LDAP_DISABLE_MAIL_ADDRESS_RESOLVER
+          valueFrom:
+            configMapKeyRef:
+              key: LDAP_DISABLE_MAIL_ADDRESS_RESOLVER
+              name: jenkins-jenkins-env
+        - name: LDAP_DISPLAY_NAME_ATTRIBUTE_NAME
+          valueFrom:
+            configMapKeyRef:
+              key: LDAP_DISPLAY_NAME_ATTRIBUTE_NAME
+              name: jenkins-jenkins-env
+        - name: LDAP_GROUP_MEMBERSHIP_FILTER
+          valueFrom:
+            configMapKeyRef:
+              key: LDAP_GROUP_MEMBERSHIP_FILTER
+              name: jenkins-jenkins-env
+        - name: LDAP_GROUP_NAME_ADMIN
+          valueFrom:
+            configMapKeyRef:
+              key: LDAP_GROUP_NAME_ADMIN
+              name: jenkins-jenkins-env
+        - name: LDAP_GROUP_SEARCH_FILTER
+          valueFrom:
+            configMapKeyRef:
+              key: LDAP_GROUP_SEARCH_FILTER
+              name: jenkins-jenkins-env
+        - name: LDAP_INHIBIT_INFER_ROOTDN
+          valueFrom:
+            configMapKeyRef:
+              key: LDAP_INHIBIT_INFER_ROOTDN
+              name: jenkins-jenkins-env
+        - name: LDAP_MAIL_ADDRESS_ATTRIBUTE_NAME
+          valueFrom:
+            configMapKeyRef:
+              key: LDAP_MAIL_ADDRESS_ATTRIBUTE_NAME
+              name: jenkins-jenkins-env
+        - name: LDAP_MANAGER_DN
+          valueFrom:
+            configMapKeyRef:
+              key: LDAP_MANAGER_DN
+              name: jenkins-jenkins-env
+        - name: LDAP_MANAGER_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: LDAP_MANAGER_PASSWORD
+              name: jenkins-jenkins-env
+        - name: LDAP_ROOTDN
+          valueFrom:
+            configMapKeyRef:
+              key: LDAP_ROOTDN
+              name: jenkins-jenkins-env
+        - name: LDAP_SERVER
+          valueFrom:
+            configMapKeyRef:
+              key: LDAP_SERVER
+              name: jenkins-jenkins-env
+        - name: LDAP_USER_SEARCH
+          valueFrom:
+            configMapKeyRef:
+              key: LDAP_USER_SEARCH
+              name: jenkins-jenkins-env
+        - name: MAVEN_VERSION
+          valueFrom:
+            configMapKeyRef:
+              key: MAVEN_VERSION
+              name: jenkins-jenkins-env
+        - name: NODEJS_GLOBAL_PACKAGES
+          valueFrom:
+            configMapKeyRef:
+              key: NODEJS_GLOBAL_PACKAGES
+              name: jenkins-jenkins-env
+        - name: NODEJS_PACKAGES_REFRESH_HOURS
+          valueFrom:
+            configMapKeyRef:
+              key: NODEJS_PACKAGES_REFRESH_HOURS
+              name: jenkins-jenkins-env
+        - name: NODEJS_VERSION
+          valueFrom:
+            configMapKeyRef:
+              key: NODEJS_VERSION
+              name: jenkins-jenkins-env
+        image: accenture/adop-jenkins
+        name: jenkins
+        resources: {}
+      restartPolicy: Always
+status: {}

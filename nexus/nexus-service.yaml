@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: nexus
+  name: nexus
+spec:
+  ports:
+  - name: "nexus"
+    port: 8081
+    targetPort: 8081
+  selector:
+    app: nexus-rs
+  type: ClusterIP
+---
+

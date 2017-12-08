@@ -1,0 +1,19 @@
+---
+version: "3"
+
+services:
+  jenkins:
+    env_file: jenkins.env 
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+    image: accenture/adop-jenkins
+    networks: 
+      - my-network
+
+networks:
+  my-network:
+    driver: overlay
+    external: true
+    
